@@ -287,6 +287,108 @@
     </header>
 
     <!-- Rest of your existing HTML structure remains the same -->
+<section id="contact" class="container" style="padding: 4rem 0;">
+    <h2 class="section-title">Get In Touch</h2>
+    <div style="max-width: 600px; margin: 0 auto;">
+        <form id="contactForm" style="background: var(--github-card); padding: 2rem; border-radius: 6px; border: 1px solid var(--github-border);">
+            <div style="margin-bottom: 1.5rem;">
+                <label for="name" style="display: block; margin-bottom: 0.5rem; color: var(--github-light);">Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    required
+                    style="
+                        width: 100%;
+                        padding: 0.75rem;
+                        background: var(--github-dark);
+                        border: 1px solid var(--github-border);
+                        border-radius: 6px;
+                        color: var(--github-light);
+                        font-size: 1rem;
+                    "
+                >
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label for="email" style="display: block; margin-bottom: 0.5rem; color: var(--github-light);">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    required
+                    style="
+                        width: 100%;
+                        padding: 0.75rem;
+                        background: var(--github-dark);
+                        border: 1px solid var(--github-border);
+                        border-radius: 6px;
+                        color: var(--github-light);
+                        font-size: 1rem;
+                    "
+                >
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label for="message" style="display: block; margin-bottom: 0.5rem; color: var(--github-light);">Message</label>
+                <textarea 
+                    id="message" 
+                    rows="5" 
+                    required
+                    style="
+                        width: 100%;
+                        padding: 0.75rem;
+                        background: var(--github-dark);
+                        border: 1px solid var(--github-border);
+                        border-radius: 6px;
+                        color: var(--github-light);
+                        font-size: 1rem;
+                        resize: vertical;
+                    "
+                ></textarea>
+            </div>
+
+            <button 
+                type="submit"
+                style="
+                    background: var(--github-green);
+                    color: white;
+                    border: none;
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 6px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    transition: background-color 0.3s ease;
+                "
+            >
+                Send Message <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+
+        <!-- Social Links -->
+        <div style="
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--github-border);
+        ">
+            <a href="https://github.com/yourusername" style="color: var(--github-light); font-size: 1.5rem;">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/yourusername" style="color: var(--github-light); font-size: 1.5rem;">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:your@email.com" style="color: var(--github-light); font-size: 1.5rem;">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Add this script section 
 
     <script>
         // Scroll Progress Bar
