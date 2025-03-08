@@ -1,14 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Chat Assistant</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="https://doanai.netlify.app/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Douglas Anguzu</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #app-container {
+            width: 100%;
+            height: 100%;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background-color: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <div class="loading">Loading application...</div>
+    </div>
+
+    <script>
+        // This is a proxy script to load content from Vercel to GitHub Pages
+        (async function loadApp() {
+            const targetUrl = 'https://v0-futuristic-ui-design-dun.vercel.app/';
+            const container = document.getElementById('app-container');
+            
+            try {
+                // Fetch the HTML content from your Vercel app
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
+                const data = await response.json();
+                
+                if (!data || !data.contents) {
+                    throw new Error('Failed to load content');
+                }
+                
+                // Parse the HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data.contents, 'text/html');
+                
+                // Extract the head content
+                const headContent = doc.head.innerHTML;
+                
+                // Update base URL for resources
+                const baseTag = document.createElement('base');
+                baseTag.href = targetUrl;
+                document.head.appendChild(baseTag);
+                
+                // Append styles and scripts from the original page
+                const styles = doc.querySelectorAll('link[rel="stylesheet"]');
+                styles.forEach(style => {
+                    const newStyle = document.createElement('link');
+                    newStyle.rel = 'stylesheet';
+                    newStyle.href = style.href;
+                    document.head.appendChild(newStyle);
+                });
+                
+                const scripts = doc.querySelectorAll('script[src]');
+                scripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    newScript.src = script.src;
+                    document.body.appendChild(newScript);
+                });
+                
+                // Replace body content
+                container.innerHTML = doc.body.innerHTML;
+                
+                // Handle script tags without src (inline scripts)
+                const inlineScripts = doc.querySelectorAll('script:not([src])');
+                inlineScripts.forEach(script => {
+                    const newScript = document.createElement('script');
+                    newScript.textContent = script.textContent;
+                    document.body.appendChild(newScript);
+                });
+                
+                // Add a fallback for dynamic content loading
+                window.addEventListener('DOMContentLoaded', function() {
+                    if (container.textContent.trim() === 'Loading application...') {
+                        console.log('Fallback content loading triggered');
+                        document.location.href = targetUrl;
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Error loading application:', error);
+                // Fallback redirect
+                container.innerHTML = `<div class="loading">
+                    Application loading failed. Redirecting...
+                </div>`;
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 2000);
+            }
+        })();
+    </script>
+</body>
 </html>
